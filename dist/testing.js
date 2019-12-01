@@ -52,7 +52,7 @@ Methods
     - toJSON : creates json object of metadata
 
 */
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 /*
 
 Displays scenes using WebGL
@@ -85,24 +85,86 @@ BoxGeometry is a geometry class for a rectangular cuboid with a given 'width', '
 On creation, the cuboid is centred on the origin, with each edge parallel to one of the axes.
 
 */
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
+const material = new THREE.MeshBasicMaterial({ color: 0x0000ff, wireframe: true });
 /*
 
 A material for drawing geometries in a simple shaded (flat or wireframe) way.
 Not affected by light
 
+Constructor
+    - Geometry
+    - Material
+
 */
 const cube = new THREE.Mesh(geometry, material);
+/*
+
+Class representing triangular polygon mesh based objects.
+
+*/
 scene.add(cube);
 // Set camera
-camera.position.z = 5;
+// camera.position.z = 5;
+camera.position.set(0, 0, 5);
+camera.lookAt(0, 0, 0);
+// Line
+const line_material = new THREE.LineBasicMaterial({ color: 0x0000ff });
+/*
+
+@todo fill in line material
+
+*/
+const line_geometry = new THREE.Geometry();
+/*
+
+@todo fill in geometry methods
+
+*/
+line_geometry.vertices.push(new THREE.Vector3(-1, 0, 0));
+line_geometry.vertices.push(new THREE.Vector3(0, 1, 0));
+line_geometry.vertices.push(new THREE.Vector3(1, 0, 0));
+line_geometry.vertices.push(new THREE.Vector3(0, -1, 0));
+line_geometry.vertices.push(new THREE.Vector3(-1, 0, 0));
+const line = new THREE.Line(line_geometry, line_material);
+/*
+
+@todo fill in line
+
+*/
+scene.add(line);
+// Testing hover
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+let mouse_moved = false;
+function onMouseMove(event) {
+    mouse_moved = true;
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+}
+window.addEventListener('mousemove', onMouseMove, false);
 // Animate
-function animate() {
+let last_frame = 0;
+function animate(time) {
     requestAnimationFrame(animate);
+    const delta = (time - last_frame) / 1000;
+    last_frame = time;
     // Rotate
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+    const speed = 1;
+    cube.rotation.x += delta * speed;
+    cube.rotation.y += delta * speed;
+    // Hover
+    if (mouse_moved) {
+        raycaster.setFromCamera(mouse, camera);
+        // calculate objects intersecting the picking ray
+        const intersects = raycaster.intersectObjects(scene.children);
+        for (let i = 0; i < scene.children.length; i++) {
+            scene.children[i].material.color.set(0x0000ff);
+        }
+        for (let i = 0; i < intersects.length; i++) {
+            intersects[i].object.material.color.set(0xff0000);
+        }
+    }
     // Render
     renderer.render(scene, camera);
 }
-animate();
+animate(0);
