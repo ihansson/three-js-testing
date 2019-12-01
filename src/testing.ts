@@ -109,7 +109,17 @@ Constructor
 
 */
 
-const cube = new THREE.Mesh( geometry, material );
+function rand(min: number, max: number) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+for( let i = 0; i < 100; i++ ){
+	let cube = new THREE.Mesh( geometry, material );
+	cube.position.x = rand(0, 100) - 50;
+	cube.position.y = rand(0, 100) - 50;
+	cube.position.z = rand(0, 100) - 50;
+	scene.add(cube)
+}
 
 /*
 
@@ -117,13 +127,12 @@ Class representing triangular polygon mesh based objects.
 
 */
 
-scene.add( cube );
 
 // Set camera
 
 // camera.position.z = 5;
 
-camera.position.set( 0, 0, 5 );
+camera.position.set( 0, 0, 50 );
 camera.lookAt( 0, 0, 0 );
 
 // Line
@@ -187,8 +196,8 @@ function animate(time: number) {
 
 	const speed = 1;
 
-	cube.rotation.x += delta * speed;
-	cube.rotation.y += delta * speed;
+	// cube.rotation.x += delta * speed;
+	// cube.rotation.y += delta * speed;
 
 	// Hover
 

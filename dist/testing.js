@@ -96,16 +96,24 @@ Constructor
     - Material
 
 */
-const cube = new THREE.Mesh(geometry, material);
+function rand(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+for (let i = 0; i < 100; i++) {
+    let cube = new THREE.Mesh(geometry, material);
+    cube.position.x = rand(0, 100) - 50;
+    cube.position.y = rand(0, 100) - 50;
+    cube.position.z = rand(0, 100) - 50;
+    scene.add(cube);
+}
 /*
 
 Class representing triangular polygon mesh based objects.
 
 */
-scene.add(cube);
 // Set camera
 // camera.position.z = 5;
-camera.position.set(0, 0, 5);
+camera.position.set(0, 0, 50);
 camera.lookAt(0, 0, 0);
 // Line
 const line_material = new THREE.LineBasicMaterial({ color: 0x0000ff });
@@ -150,8 +158,8 @@ function animate(time) {
     last_frame = time;
     // Rotate
     const speed = 1;
-    cube.rotation.x += delta * speed;
-    cube.rotation.y += delta * speed;
+    // cube.rotation.x += delta * speed;
+    // cube.rotation.y += delta * speed;
     // Hover
     if (mouse_moved) {
         raycaster.setFromCamera(mouse, camera);
