@@ -1,0 +1,25 @@
+{
+  "name": "three-js-testing",
+  "version": "0.0.1",
+  "description": "Testing three-js",
+  "main": "src/testing.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ihansson/three-js-testing.git"
+  },
+  "scripts": {
+    "watch": "tsc --watch"
+  },
+  "keywords": [
+    "typescript",
+    "javascript",
+    "utility"
+  ],
+  "author": "Ian Hansson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ihansson/three-js-testing/issues"
+  },
+  "author": "",
+  "license": "ISC"
+}
