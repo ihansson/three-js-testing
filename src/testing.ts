@@ -96,9 +96,17 @@ On creation, the cuboid is centred on the origin, with each edge parallel to one
 */
 
 
-const material = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: true } );
+// const material = new THREE.MeshBasicMaterial( { color: 0x0000ff, wireframe: true } );
+const material = new THREE.MeshLambertMaterial( { color: 0x0087E6 } );
+
+const ambientLight = new THREE.AmbientLight( 0x404040 );
+scene.add(ambientLight);
+const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+scene.add( directionalLight );
 
 /* 
+
+MeshBasicMaterial
 
 A material for drawing geometries in a simple shaded (flat or wireframe) way.
 Not affected by light
@@ -209,11 +217,11 @@ function animate(time: number) {
 		const intersects = raycaster.intersectObjects( scene.children );
 
 		for ( let i = 0; i < scene.children.length; i++ ) {
-			scene.children[ i ].material.color.set( 0x0000ff );
+			// scene.children[ i ].material.color.set( 0x0000ff );
 		}
 
 		for ( let i = 0; i < intersects.length; i++ ) {
-			intersects[ i ].object.material.color.set( 0xff0000 );
+			// intersects[ i ].object.material.color.set( 0xff0000 );
 		}
 
 	}
