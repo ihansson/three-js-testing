@@ -171,8 +171,9 @@ const line = new THREE.Line( line_geometry, line_material );
 
 const circle_geometry = new THREE.CircleGeometry( 1, 32 );
 circle_geometry.vertices.shift();
-const circle_material = new THREE.LineBasicMaterial( { color: 0xffff00 } );
-const circle = new THREE.LineLoop( circle_geometry, circle_material );
+const circle_material = new THREE.LineDashedMaterial( { color: 0xffff00, dashSize: 0.1, gapSize: 0.2 } );
+const circle = new THREE.Line( circle_geometry, circle_material );
+circle.computeLineDistances();
 scene.add( circle );
 circle.animation_progress = 0;
 circle.animation_progress_delta = 0.75;
@@ -239,9 +240,7 @@ function animate(time: number) {
 
 	circle.scale.x = 1 + circle_animation_state;
 	circle.scale.y = 1 + circle_animation_state;
-
-	console.log(circle.scale.x);
-
+	circle.rotateZ(0.05 * circle_animation_state);
 
 	// Hover
 
