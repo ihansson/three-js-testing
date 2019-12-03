@@ -140,7 +140,7 @@ Class representing triangular polygon mesh based objects.
 
 // camera.position.z = 5;
 
-camera.position.set( 0, 0, 50 );
+camera.position.set( 0, 0, 5 );
 camera.lookAt( 0, 0, 0 );
 
 // Line
@@ -168,6 +168,20 @@ line_geometry.vertices.push(new THREE.Vector3( 0, -1, 0) );
 line_geometry.vertices.push(new THREE.Vector3( -1, 0, 0) );
 
 const line = new THREE.Line( line_geometry, line_material );
+
+const circle_geometry = new THREE.CircleGeometry( 1, 32 );
+circle_geometry.vertices.shift();
+const circle_material = new THREE.LineBasicMaterial( { color: 0xffff00 } );
+const circle = new THREE.LineLoop( circle_geometry, circle_material );
+scene.add( circle );
+circle.animation_progress = 0;
+circle.animation_progress_delta = 0.25;
+
+/* 
+
+Circle - Radius / segments
+
+*/
 
 /* 
 
@@ -206,6 +220,9 @@ function animate(time: number) {
 
 	// cube.rotation.x += delta * speed;
 	// cube.rotation.y += delta * speed;
+
+	circle.animation_progress = circle.animation_progress_delta * delta;
+	console.log(circle.animation_progress)
 
 	// Hover
 
