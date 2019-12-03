@@ -175,7 +175,8 @@ const circle_material = new THREE.LineBasicMaterial( { color: 0xffff00 } );
 const circle = new THREE.LineLoop( circle_geometry, circle_material );
 scene.add( circle );
 circle.animation_progress = 0;
-circle.animation_progress_delta = 0.25;
+circle.animation_progress_delta = 0.75;
+circle.up = true;
 
 /* 
 
@@ -221,8 +222,26 @@ function animate(time: number) {
 	// cube.rotation.x += delta * speed;
 	// cube.rotation.y += delta * speed;
 
-	circle.animation_progress = circle.animation_progress_delta * delta;
-	console.log(circle.animation_progress)
+	if(circle.up){
+		circle.animation_progress += circle.animation_progress_delta * delta;
+		if(circle.animation_progress > 1) {
+			circle.animation_progress = 1;
+			circle.up = false;
+		}
+	} else {
+		circle.animation_progress -= circle.animation_progress_delta * delta;
+		if(circle.animation_progress < 0) {
+			circle.animation_progress = 0;
+			circle.up = true;
+		}
+	}
+	const circle_animation_state = ease(circle.animation_progress);
+
+	circle.scale.x = 1 + circle_animation_state;
+	circle.scale.y = 1 + circle_animation_state;
+
+	console.log(circle.scale.x);
+
 
 	// Hover
 
@@ -246,5 +265,7 @@ function animate(time: number) {
 	// Render
 	renderer.render( scene, camera );
 }
+
+function ease(t: number) { return t<.5 ? 2*t*t : -1+(4-2*t)*t }
 
 animate(0);
