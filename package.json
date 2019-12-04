@@ -22,6 +22,7 @@
     "url": "https://github.com/ihansson/three-js-testing/issues"
   },
   "dependencies": {
-    "three": "^0.111.0"
+    "three": "^0.111.0",
+    "three-orbitcontrols": "^2.110.1"
   }
 }

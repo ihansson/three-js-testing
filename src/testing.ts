@@ -1,9 +1,7 @@
 // @todo import three types
 
-import * as OrbitControls from '../vendor/OrbitControls.min.js';
-import * as THREE from 'three';
-
-const THREE = <any>(<any>window).THREE;
+import * as THREE from '../node_modules/three/src/Three.js';
+import * as OrbitControls from '../node_modules/three-orbitcontrols/OrbitControls.js';
 
 const scene = new THREE.Scene();
 /* 
@@ -64,7 +62,7 @@ Methods
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 
 
-const controls = new THREE.OrbitControls( camera, renderer.domElement );
+const controls = new OrbitControls( camera, renderer.domElement );
 /* 
 
 Displays scenes using WebGL
@@ -179,7 +177,7 @@ const line = new THREE.Line( line_geometry, line_material );
 const circle_geometry = new THREE.CircleGeometry( 1, 32 );
 circle_geometry.vertices.shift();
 const circle_material = new THREE.LineDashedMaterial( { color: 0xffff00, dashSize: 0.1, gapSize: 0.2 } );
-const circle = new THREE.Line( circle_geometry, circle_material );
+const circle: any = new THREE.Line( circle_geometry, circle_material );
 circle.computeLineDistances();
 scene.add( circle );
 circle.animation_progress = 0;

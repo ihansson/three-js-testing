@@ -1,5 +1,6 @@
 // @todo import three types
-const THREE = window.THREE;
+import * as THREE from '../node_modules/three/src/Three.js';
+import * as OrbitControls from '../node_modules/three-orbitcontrols/OrbitControls.js';
 const scene = new THREE.Scene();
 /*
 
@@ -53,7 +54,7 @@ Methods
 
 */
 const renderer = new THREE.WebGLRenderer({ antialias: true });
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
 /*
 
 Displays scenes using WebGL
