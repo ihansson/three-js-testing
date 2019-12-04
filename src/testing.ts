@@ -1,5 +1,8 @@
 // @todo import three types
 
+import * as OrbitControls from '../vendor/OrbitControls.min.js';
+import * as THREE from 'three';
+
 const THREE = <any>(<any>window).THREE;
 
 const scene = new THREE.Scene();

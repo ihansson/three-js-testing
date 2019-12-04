@@ -16,11 +16,12 @@
     "3d",
     "three-js"
   ],
-  "author": "Ian Hansson",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ihansson/three-js-testing/issues"
   },
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "three": "^0.111.0"
+  }
 }
