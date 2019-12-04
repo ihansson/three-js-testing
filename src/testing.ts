@@ -19,6 +19,8 @@ Methods
 */
 
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+
 /*
 
 This projection mode is designed to mimic the way the human eye sees. It is the most common projection mode used for rendering a 3D scene.
@@ -58,6 +60,8 @@ Methods
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 
+
+const controls = new THREE.OrbitControls( camera, renderer.domElement );
 /* 
 
 Displays scenes using WebGL
