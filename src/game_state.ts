@@ -22,12 +22,12 @@ export class GameState {
 	init_space(){
 
 		// Add Cursor
-		this.game.entities.add(new Cursor())
+		this.game.entities.add(new Cursor({game: this.game}))
 
 		// Add Asteroids
 		let i = 5;
 		while(i){
-			this.game.entities.add(new Asteroid())
+			this.game.entities.add(new Asteroid({game: this.game}))
 			i--;
 		}
 
@@ -39,6 +39,6 @@ export class GameState {
 
 	end_space(){
 
-	}
+	} 
 
 }

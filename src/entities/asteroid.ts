@@ -1,8 +1,8 @@
 import { Entity } from "~/entity";
 
 export class Asteroid extends Entity {
-	constructor(){
-		super();
+	constructor(options: any){
+		super(options);
 		
 	}
 }

@@ -1,9 +1,11 @@
+import { Game } from "~/game";
+
 export class Entity {
 	should_update: boolean;
-	constructor(){
+	game: Game;
+	constructor(options: any){
+		this.game = options.game; 
 		this.should_update = true;
 	}
-	update(delta: number){
-		
-	}
+	update(delta: number){}
 }

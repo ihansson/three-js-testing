@@ -4,6 +4,7 @@ import { EntitySystem } from "~/entity_system";
 import { Entity } from "~/entity";
 import { EventSystem } from "~/event_system";
 import { Event } from "~/event";
+import { Controls } from "~/controls";
 import { GameState } from "~/game_state";
 
 export class Game {
@@ -16,11 +17,14 @@ export class Game {
 	entities: EntitySystem;
 	events: EventSystem;
 
+	controls: Controls;
+
 	constructor(){
 		this.init_renderer();
 		this.init_entities();
 		this.init_events();
 		this.init_state();
+		this.init_controls();
 		this.init_animation();
 	}
 
@@ -40,7 +44,7 @@ export class Game {
 
 		this.entities = new EntitySystem();
 		this.entities.scene = new Scene();
-		this.entities.camera = new Camera();
+		this.entities.camera = new Camera({game: this});
 		this.entities.add(this.entities.camera);
 
 	}
@@ -72,6 +76,14 @@ export class Game {
 				this.state.update();
 			}
 		}))
+
+	}
+
+	// Setup controls
+
+	init_controls(): void{
+
+		this.controls = new Controls(this);
 
 	}
 
