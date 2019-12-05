@@ -98,15 +98,39 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ "./src/camera.ts":
-/*!***********************!*\
-  !*** ./src/camera.ts ***!
-  \***********************/
+/***/ "./src/entities/asteroid.ts":
+/*!**********************************!*\
+  !*** ./src/entities/asteroid.ts ***!
+  \**********************************/
+/*! exports provided: Asteroid */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Asteroid\", function() { return Asteroid; });\n/* harmony import */ var _entity__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ~/entity */ \"./src/entity.ts\");\n\r\nclass Asteroid extends _entity__WEBPACK_IMPORTED_MODULE_0__[\"Entity\"] {\r\n    constructor() {\r\n        super();\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/entities/asteroid.ts?");
+
+/***/ }),
+
+/***/ "./src/entities/camera.ts":
+/*!********************************!*\
+  !*** ./src/entities/camera.ts ***!
+  \********************************/
 /*! exports provided: Camera */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Camera\", function() { return Camera; });\n/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ \"./node_modules/three/build/three.module.js\");\n/* harmony import */ var _entity__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ~/entity */ \"./src/entity.ts\");\n\r\n\r\nclass Camera extends _entity__WEBPACK_IMPORTED_MODULE_1__[\"Entity\"] {\r\n    constructor() {\r\n        super();\r\n        this.object = new three__WEBPACK_IMPORTED_MODULE_0__[\"PerspectiveCamera\"](75, window.innerWidth / window.innerHeight, 0.1, 1000);\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/camera.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Camera\", function() { return Camera; });\n/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ \"./node_modules/three/build/three.module.js\");\n/* harmony import */ var _entity__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ~/entity */ \"./src/entity.ts\");\n\r\n\r\nclass Camera extends _entity__WEBPACK_IMPORTED_MODULE_1__[\"Entity\"] {\r\n    constructor() {\r\n        super();\r\n        this.object = new three__WEBPACK_IMPORTED_MODULE_0__[\"PerspectiveCamera\"](75, window.innerWidth / window.innerHeight, 0.1, 1000);\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/entities/camera.ts?");
+
+/***/ }),
+
+/***/ "./src/entities/cursor.ts":
+/*!********************************!*\
+  !*** ./src/entities/cursor.ts ***!
+  \********************************/
+/*! exports provided: Cursor */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Cursor\", function() { return Cursor; });\n/* harmony import */ var _entity__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ~/entity */ \"./src/entity.ts\");\n\r\nclass Cursor extends _entity__WEBPACK_IMPORTED_MODULE_0__[\"Entity\"] {\r\n    constructor() {\r\n        super();\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/entities/cursor.ts?");
 
 /***/ }),
 
@@ -118,7 +142,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Entity\", function() { return Entity; });\nclass Entity {\r\n    constructor() {\r\n        this.should_update = true;\r\n        console.log('hello');\r\n    }\r\n    update(delta) {\r\n        console.log('rendering');\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/entity.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Entity\", function() { return Entity; });\nclass Entity {\r\n    constructor() {\r\n        this.should_update = true;\r\n    }\r\n    update(delta) {\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/entity.ts?");
 
 /***/ }),
 
@@ -162,11 +186,23 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /*!*********************!*\
   !*** ./src/game.ts ***!
   \*********************/
-/*! no exports provided */
+/*! exports provided: Game */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ \"./node_modules/three/build/three.module.js\");\n/* harmony import */ var _camera__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ~/camera */ \"./src/camera.ts\");\n/* harmony import */ var _entity_system__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ~/entity_system */ \"./src/entity_system.ts\");\n/* harmony import */ var _event_system__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ~/event_system */ \"./src/event_system.ts\");\n/* harmony import */ var _event__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ~/event */ \"./src/event.ts\");\n\r\n\r\n\r\n\r\n\r\nclass Game {\r\n    constructor() {\r\n        this.init_renderer();\r\n        this.init_entities();\r\n        this.init_events();\r\n        this.init_animation();\r\n    }\r\n    // Setup Renderer\r\n    init_renderer() {\r\n        this.renderer = new three__WEBPACK_IMPORTED_MODULE_0__[\"WebGLRenderer\"]({ antialias: true });\r\n        this.renderer.setSize(window.innerWidth, window.innerHeight);\r\n        document.body.appendChild(this.renderer.domElement);\r\n    }\r\n    // Setup entities\r\n    init_entities() {\r\n        this.entities = new _entity_system__WEBPACK_IMPORTED_MODULE_2__[\"EntitySystem\"]();\r\n        this.entities.scene = new three__WEBPACK_IMPORTED_MODULE_0__[\"Scene\"]();\r\n        this.entities.camera = new _camera__WEBPACK_IMPORTED_MODULE_1__[\"Camera\"]();\r\n        this.entities.add(this.entities.camera);\r\n    }\r\n    // Setup events system\r\n    init_events() {\r\n        this.events = new _event_system__WEBPACK_IMPORTED_MODULE_3__[\"EventSystem\"]();\r\n        this.events.add(new _event__WEBPACK_IMPORTED_MODULE_4__[\"Event\"]({\r\n            'recurring': true,\r\n            'delay': 1000,\r\n            'callback': function () {\r\n                console.log('One Second Timer');\r\n            }\r\n        }));\r\n    }\r\n    // Setup animation\r\n    init_animation() {\r\n        this.animate = this.animate.bind(this);\r\n        this.previous_time = 0;\r\n        this.animate(0);\r\n    }\r\n    // Animation Loop. Call update on entities and events\r\n    animate(time) {\r\n        requestAnimationFrame(this.animate);\r\n        const delta = this.get_delta(time);\r\n        this.events.update(delta);\r\n        this.entities.filter('should_update', true).forEach((entity) => {\r\n            entity.update(delta);\r\n        });\r\n        this.render();\r\n    }\r\n    // Call Render\r\n    render() {\r\n        this.renderer.render(this.entities.scene, this.entities.camera.object);\r\n    }\r\n    get_delta(time) {\r\n        const delta = (time - this.previous_time);\r\n        this.previous_time = time;\r\n        return delta;\r\n    }\r\n}\r\nconst _game = new Game();\r\nwindow.game = _game;\r\nconsole.log(_game);\r\n\n\n//# sourceURL=webpack:///./src/game.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Game\", function() { return Game; });\n/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ \"./node_modules/three/build/three.module.js\");\n/* harmony import */ var _entities_camera__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ~/entities/camera */ \"./src/entities/camera.ts\");\n/* harmony import */ var _entity_system__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ~/entity_system */ \"./src/entity_system.ts\");\n/* harmony import */ var _event_system__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ~/event_system */ \"./src/event_system.ts\");\n/* harmony import */ var _event__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ~/event */ \"./src/event.ts\");\n/* harmony import */ var _game_state__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ~/game_state */ \"./src/game_state.ts\");\n\r\n\r\n\r\n\r\n\r\n\r\nclass Game {\r\n    constructor() {\r\n        this.init_renderer();\r\n        this.init_entities();\r\n        this.init_events();\r\n        this.init_state();\r\n        this.init_animation();\r\n    }\r\n    // Setup Renderer\r\n    init_renderer() {\r\n        this.renderer = new three__WEBPACK_IMPORTED_MODULE_0__[\"WebGLRenderer\"]({ antialias: true });\r\n        this.renderer.setSize(window.innerWidth, window.innerHeight);\r\n        document.body.appendChild(this.renderer.domElement);\r\n    }\r\n    // Setup entities\r\n    init_entities() {\r\n        this.entities = new _entity_system__WEBPACK_IMPORTED_MODULE_2__[\"EntitySystem\"]();\r\n        this.entities.scene = new three__WEBPACK_IMPORTED_MODULE_0__[\"Scene\"]();\r\n        this.entities.camera = new _entities_camera__WEBPACK_IMPORTED_MODULE_1__[\"Camera\"]();\r\n        this.entities.add(this.entities.camera);\r\n    }\r\n    // Setup events system\r\n    init_events() {\r\n        this.events = new _event_system__WEBPACK_IMPORTED_MODULE_3__[\"EventSystem\"]();\r\n        this.events.add(new _event__WEBPACK_IMPORTED_MODULE_4__[\"Event\"]({\r\n            'recurring': true,\r\n            'delay': 1000,\r\n            'callback': function () {\r\n                console.log('One Second Timer');\r\n            }\r\n        }));\r\n    }\r\n    // Setup game state\r\n    init_state() {\r\n        this.state = new _game_state__WEBPACK_IMPORTED_MODULE_5__[\"GameState\"](this, 'space');\r\n        this.events.add(new _event__WEBPACK_IMPORTED_MODULE_4__[\"Event\"]({\r\n            'recurring': true,\r\n            'delay': 1000,\r\n            'callback': () => {\r\n                this.state.update();\r\n            }\r\n        }));\r\n    }\r\n    // Setup animation\r\n    init_animation() {\r\n        this.animate = this.animate.bind(this);\r\n        this.previous_time = 0;\r\n        this.animate(0);\r\n    }\r\n    // Animation Loop. Call update on entities and events\r\n    animate(time) {\r\n        requestAnimationFrame(this.animate);\r\n        const delta = this.get_delta(time);\r\n        this.events.update(delta);\r\n        this.entities.filter('should_update', true).forEach((entity) => {\r\n            entity.update(delta);\r\n        });\r\n        this.render();\r\n    }\r\n    // Call Render\r\n    render() {\r\n        this.renderer.render(this.entities.scene, this.entities.camera.object);\r\n    }\r\n    get_delta(time) {\r\n        const delta = (time - this.previous_time);\r\n        this.previous_time = time;\r\n        return delta;\r\n    }\r\n}\r\nconst _game = new Game();\r\nwindow.game = _game;\r\nconsole.log(_game);\r\n\n\n//# sourceURL=webpack:///./src/game.ts?");
+
+/***/ }),
+
+/***/ "./src/game_state.ts":
+/*!***************************!*\
+  !*** ./src/game_state.ts ***!
+  \***************************/
+/*! exports provided: GameState */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"GameState\", function() { return GameState; });\n/* harmony import */ var _entities_cursor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ~/entities/cursor */ \"./src/entities/cursor.ts\");\n/* harmony import */ var _entities_asteroid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ~/entities/asteroid */ \"./src/entities/asteroid.ts\");\n\r\n\r\nclass GameState {\r\n    constructor(game, type) {\r\n        this.game = game;\r\n        this.type = type;\r\n        this['init_' + this.type]();\r\n    }\r\n    update() {\r\n        this['update_' + this.type]();\r\n    }\r\n    // Space\r\n    init_space() {\r\n        // Add Cursor\r\n        this.game.entities.add(new _entities_cursor__WEBPACK_IMPORTED_MODULE_0__[\"Cursor\"]());\r\n        // Add Asteroids\r\n        let i = 5;\r\n        while (i) {\r\n            this.game.entities.add(new _entities_asteroid__WEBPACK_IMPORTED_MODULE_1__[\"Asteroid\"]());\r\n            i--;\r\n        }\r\n    }\r\n    update_space() {\r\n    }\r\n    end_space() {\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/game_state.ts?");
 
 /***/ }),
 

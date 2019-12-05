@@ -1,7 +1,7 @@
 import { System } from "~/system";
 import { Scene } from "three";
 import { Entity } from "~/entity";
-import { Camera } from "~/camera";
+import { Camera } from "~/entities/camera";
 
 export class EntitySystem extends System<Entity> {
 	scene: Scene;

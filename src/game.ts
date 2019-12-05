@@ -1,15 +1,17 @@
 import { WebGLRenderer, Scene } from "three";
-import { Camera } from "~/camera";
+import { Camera } from "~/entities/camera";
 import { EntitySystem } from "~/entity_system";
 import { Entity } from "~/entity";
 import { EventSystem } from "~/event_system";
 import { Event } from "~/event";
+import { GameState } from "~/game_state";
 
-class Game {
+export class Game {
 	
 	renderer: WebGLRenderer;
 	scene: Scene;
 	camera: Camera;
+	state: GameState;
 
 	entities: EntitySystem;
 	events: EventSystem;
@@ -18,6 +20,7 @@ class Game {
 		this.init_renderer();
 		this.init_entities();
 		this.init_events();
+		this.init_state();
 		this.init_animation();
 	}
 
@@ -52,6 +55,21 @@ class Game {
 			'delay': 1000,
 			'callback': function(){
 				console.log('One Second Timer');
+			}
+		}))
+
+	}
+
+	// Setup game state
+
+	init_state(): void{
+
+		this.state = new GameState(this, 'space');
+		this.events.add(new Event({
+			'recurring': true,
+			'delay': 1000,
+			'callback': () => {
+				this.state.update();
 			}
 		}))
 
