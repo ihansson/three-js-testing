@@ -1,21 +1,8 @@
+import { System } from "~/system";
 import { Event } from "~/event";
 
-export class EventSystem {
-	events: Event[];
+export class EventSystem extends System<Event> {
 	constructor(){
-		this.events = [];
-	}
-	add(event: Event){
-		this.events.push(event)
-	}
-	remove(event: Event){
-		this.events = this.events.filter((_event: Event): boolean => {
-			return _event !== event;
-		})
-	}
-	update(delta: number){
-		this.events = this.events.filter((event: Event): boolean => {
-			return event.update(delta);
-		});
+		super();
 	}
 }

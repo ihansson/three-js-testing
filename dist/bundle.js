@@ -118,7 +118,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Entity\", function() { return Entity; });\nclass Entity {\r\n    constructor() {\r\n        this.should_update = false;\r\n        console.log('hello');\r\n    }\r\n    update(delta) {\r\n        console.log('rendering');\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/entity.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Entity\", function() { return Entity; });\nclass Entity {\r\n    constructor() {\r\n        this.should_update = true;\r\n        console.log('hello');\r\n    }\r\n    update(delta) {\r\n        console.log('rendering');\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/entity.ts?");
 
 /***/ }),
 
@@ -130,7 +130,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"EntitySystem\", function() { return EntitySystem; });\nclass EntitySystem {\r\n    constructor() {\r\n        this.entities = [];\r\n    }\r\n    add(entity) {\r\n        this.entities.push(entity);\r\n    }\r\n    remove(entity) {\r\n        this.entities = this.entities.filter((_entity) => {\r\n            return _entity !== entity;\r\n        });\r\n    }\r\n    filter(prop, value) {\r\n        return this.entities.filter((entity) => {\r\n            return entity[prop] === value;\r\n        });\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/entity_system.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"EntitySystem\", function() { return EntitySystem; });\n/* harmony import */ var _system__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ~/system */ \"./src/system.ts\");\n\r\nclass EntitySystem extends _system__WEBPACK_IMPORTED_MODULE_0__[\"System\"] {\r\n    constructor() {\r\n        super();\r\n        this.entities = [];\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/entity_system.ts?");
 
 /***/ }),
 
@@ -154,7 +154,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"EventSystem\", function() { return EventSystem; });\nclass EventSystem {\r\n    constructor() {\r\n        this.events = [];\r\n    }\r\n    add(event) {\r\n        this.events.push(event);\r\n    }\r\n    remove(event) {\r\n        this.events = this.events.filter((_event) => {\r\n            return _event !== event;\r\n        });\r\n    }\r\n    update(delta) {\r\n        this.events = this.events.filter((event) => {\r\n            return event.update(delta);\r\n        });\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/event_system.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"EventSystem\", function() { return EventSystem; });\n/* harmony import */ var _system__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ~/system */ \"./src/system.ts\");\n\r\nclass EventSystem extends _system__WEBPACK_IMPORTED_MODULE_0__[\"System\"] {\r\n    constructor() {\r\n        super();\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/event_system.ts?");
 
 /***/ }),
 
@@ -167,6 +167,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ \"./node_modules/three/build/three.module.js\");\n/* harmony import */ var _camera__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ~/camera */ \"./src/camera.ts\");\n/* harmony import */ var _entity_system__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ~/entity_system */ \"./src/entity_system.ts\");\n/* harmony import */ var _event_system__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ~/event_system */ \"./src/event_system.ts\");\n/* harmony import */ var _event__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ~/event */ \"./src/event.ts\");\n\r\n\r\n\r\n\r\n\r\nclass Game {\r\n    constructor() {\r\n        this.init_renderer();\r\n        this.init_entities();\r\n        this.init_events();\r\n        this.init_animation();\r\n    }\r\n    // Setup Renderer\r\n    init_renderer() {\r\n        this.renderer = new three__WEBPACK_IMPORTED_MODULE_0__[\"WebGLRenderer\"]({ antialias: true });\r\n        this.renderer.setSize(window.innerWidth, window.innerHeight);\r\n        document.body.appendChild(this.renderer.domElement);\r\n    }\r\n    // Setup entities\r\n    init_entities() {\r\n        this.entities = new _entity_system__WEBPACK_IMPORTED_MODULE_2__[\"EntitySystem\"]();\r\n        this.entities.scene = new three__WEBPACK_IMPORTED_MODULE_0__[\"Scene\"]();\r\n        this.entities.camera = new _camera__WEBPACK_IMPORTED_MODULE_1__[\"Camera\"]();\r\n        this.entities.add(this.entities.camera);\r\n    }\r\n    // Setup events system\r\n    init_events() {\r\n        this.events = new _event_system__WEBPACK_IMPORTED_MODULE_3__[\"EventSystem\"]();\r\n        this.events.add(new _event__WEBPACK_IMPORTED_MODULE_4__[\"Event\"]({\r\n            'recurring': true,\r\n            'delay': 1000,\r\n            'callback': function () {\r\n                console.log('One Second Timer');\r\n            }\r\n        }));\r\n    }\r\n    // Setup animation\r\n    init_animation() {\r\n        this.animate = this.animate.bind(this);\r\n        this.previous_time = 0;\r\n        this.animate(0);\r\n    }\r\n    // Animation Loop. Call update on entities and events\r\n    animate(time) {\r\n        requestAnimationFrame(this.animate);\r\n        const delta = this.get_delta(time);\r\n        this.events.update(delta);\r\n        this.entities.filter('should_update', true).forEach((entity) => {\r\n            entity.update(delta);\r\n        });\r\n        this.render();\r\n    }\r\n    // Call Render\r\n    render() {\r\n        this.renderer.render(this.entities.scene, this.entities.camera.object);\r\n    }\r\n    get_delta(time) {\r\n        const delta = (time - this.previous_time);\r\n        this.previous_time = time;\r\n        return delta;\r\n    }\r\n}\r\nconst _game = new Game();\r\nwindow.game = _game;\r\nconsole.log(_game);\r\n\n\n//# sourceURL=webpack:///./src/game.ts?");
+
+/***/ }),
+
+/***/ "./src/system.ts":
+/*!***********************!*\
+  !*** ./src/system.ts ***!
+  \***********************/
+/*! exports provided: System */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"System\", function() { return System; });\nclass System {\r\n    constructor() {\r\n        this.children = [];\r\n    }\r\n    add(child) {\r\n        this.children.push(child);\r\n    }\r\n    remove(child) {\r\n        this.children = this.children.filter((_child) => {\r\n            return _child !== child;\r\n        });\r\n    }\r\n    update(delta) {\r\n        this.children = this.children.filter((child) => {\r\n            return child.update(delta);\r\n        });\r\n    }\r\n    filter(prop, value) {\r\n        return this.children.filter((child) => {\r\n            return child[prop] === value;\r\n        });\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./src/system.ts?");
 
 /***/ })
 
