@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: './src/game.ts',
   mode: 'production',
   module: {
     rules: [
@@ -14,6 +14,9 @@ module.exports = {
   },
   performance: { hints: false },
   resolve: {
+  	alias: {
+  		'~': path.resolve( __dirname, 'src' )
+  	},
     extensions: [ '.tsx', '.ts', '.js' ],
   },
   output: {
