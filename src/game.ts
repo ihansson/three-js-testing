@@ -15,18 +15,36 @@ class Game {
 	events: EventSystem;
 
 	constructor(){
-		
+		this.init_renderer();
+		this.init_entities();
+		this.init_events();
+		this.init_animation();
+	}
+
+	// Setup Renderer
+
+	init_renderer(): void{
+
 		this.renderer = new WebGLRenderer({ antialias: true });
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( this.renderer.domElement );
 
-		// Setup scene and entities
+	}
 
-		this.scene = new Scene();
-		this.camera = new Camera();
-		this.entities = new EntitySystem(this.scene);
+	// Setup entities
 
-		// Setup events system
+	init_entities(): void{
+
+		this.entities = new EntitySystem();
+		this.entities.scene = new Scene();
+		this.entities.camera = new Camera();
+		this.entities.add(this.entities.camera);
+
+	}
+
+	// Setup events system
+
+	init_events(): void{
 
 		this.events = new EventSystem();
 		this.events.add(new Event({
@@ -37,7 +55,11 @@ class Game {
 			}
 		}))
 
-		// Start Animation
+	}
+
+	// Setup animation
+
+	init_animation(): void{
 
 		this.animate = this.animate.bind(this);
 		this.previous_time = 0;
@@ -64,7 +86,7 @@ class Game {
 	// Call Render
 
 	render(): void{
-		this.renderer.render( this.scene, this.camera.object );
+		this.renderer.render( this.entities.scene, this.entities.camera.object );
 	}
 
 	// Get time passed between given time and last time
