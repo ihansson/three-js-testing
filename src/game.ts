@@ -20,18 +20,32 @@ class Game {
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( this.renderer.domElement );
 
+		// Setup scene and entities
+
 		this.scene = new Scene();
 		this.camera = new Camera();
-
 		this.entities = new EntitySystem(this.scene);
+
+		// Setup events system
+
 		this.events = new EventSystem();
+		this.events.add(new Event({
+			'recurring': true,
+			'delay': 1000,
+			'callback': function(){
+				console.log('One Second Timer');
+			}
+		}))
+
+		// Start Animation
 
 		this.animate = this.animate.bind(this);
+		this.previous_time = 0;
 		this.animate(0);
 
 	}
 
-	// Animation Loop. Call update on entities
+	// Animation Loop. Call update on entities and events
 
 	animate(time: number): void{
 
