@@ -1,4 +1,4 @@
-import { MeshLambertMaterial, Mesh, DodecahedronGeometry, SphereGeometry, MeshBasicMaterial } from 'three';
+import { MeshLambertMaterial, Mesh, DodecahedronGeometry } from 'three';
 import { Entity } from "~/entity";
 import { rand } from "~/helpers";
 

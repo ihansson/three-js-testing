@@ -4,7 +4,7 @@ export class Controls {
 	game: Game;
 	x: number = 0;
 	y: number = 0;
-	acceleration: number = -3;
+	acceleration: number = 0;
 	constructor(game: Game){
 		this.game = game; 
 		this.mouse_move = this.mouse_move.bind(this);
