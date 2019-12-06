@@ -2,6 +2,7 @@ import { CubeTextureLoader, AmbientLight, DirectionalLight, PointLight } from 't
 import { Game } from "~/game";
 import { Cursor } from "~/entities/cursor";
 import { Asteroid } from "~/entities/asteroid";
+import { StarField } from "~/entities/star_field";
 
 export class GameState {
 
@@ -34,12 +35,7 @@ export class GameState {
 		this.game.entities.camera.light = pointLight;
 
 		// Background
-
-		let stars: number = 200;
-		while(stars){
-			this.game.entities.add(new Asteroid({game: this.game}))
-			stars--;
-		}
+		this.game.entities.add(new StarField({game: this.game}));
 
 		// Add Cursor
 		this.game.entities.add(new Cursor({game: this.game}))

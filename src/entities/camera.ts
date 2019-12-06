@@ -4,7 +4,7 @@ import { Entity } from "~/entity";
 export class Camera extends Entity {
 	object: PerspectiveCamera;
 	light: PointLight;
-	speed: number = 1;
+	speed: number = 2;
 	constructor(options: any){
 		super(options);
 		

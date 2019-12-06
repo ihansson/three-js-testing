@@ -4,7 +4,7 @@ export class Controls {
 	game: Game;
 	x: number = 0;
 	y: number = 0;
-	acceleration: number = -1;
+	acceleration: number = -3;
 	constructor(game: Game){
 		this.game = game; 
 		this.mouse_move = this.mouse_move.bind(this);
@@ -25,9 +25,9 @@ export class Controls {
 	}
 	keypress(event: any){
 		if(event.keyCode === 115) { // down
-			this.acceleration += 0.1;
+			this.acceleration += 0.3;
 		} else if(event.keyCode === 119) { // up
-			this.acceleration -= 0.1;
+			this.acceleration -= 0.3;
 		}
 		if(this.acceleration > 5) this.acceleration = 5;
 		if(this.acceleration < -5) this.acceleration = -5;
