@@ -1,8 +1,9 @@
-import { PerspectiveCamera } from 'three';
+import { PerspectiveCamera, PointLight } from 'three';
 import { Entity } from "~/entity";
 
 export class Camera extends Entity {
 	object: PerspectiveCamera;
+	light: PointLight;
 	speed: number = 1;
 	constructor(options: any){
 		super(options);
@@ -10,7 +11,6 @@ export class Camera extends Entity {
 		this.object = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 		this.object.position.set( 0, 0, 0 );
 		this.object.lookAt( 0, 0, 5 );
-
 	}
 	update(delta: number){
 
@@ -24,6 +24,8 @@ export class Camera extends Entity {
 		this.object.rotateX(speed_y);
 
 		this.object.translateZ(this.speed * change * controls.acceleration);
+
+		this.light.position.copy( this.object.position );
 
 	}
 }
