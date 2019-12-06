@@ -27,5 +27,20 @@ export class Camera extends Entity {
 
 		this.light.position.copy( this.object.position );
 
+		this.collision();
+
+	}
+	collision(){
+
+		let collided = false;
+
+		this.game.entities.filter('collides', true).map(collider => {
+			if(this.object.position.distanceToSquared((<any>collider).mesh.position) < (<any>collider).geometry.parameters.radius * 1.2){
+				collided = true;
+			}
+		})
+
+		if(collided) this.game.controls.acceleration = (this.game.controls.acceleration * -1) * 0.75;
+
 	}
 }

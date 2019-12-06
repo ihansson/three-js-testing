@@ -34,25 +34,21 @@ export class GameState {
 		this.game.entities.camera.light = pointLight;
 
 		// Background
-		/*
-		this.game.entities.scene.background = new CubeTextureLoader().setPath( 'background/' ).load( [
-			'right.png',
-			'left.png',
-			'top.png',
-			'bot.png',
-			'front.png',
-			'back.png',
-		] );
-		*/
+
+		let stars: number = 200;
+		while(stars){
+			this.game.entities.add(new Asteroid({game: this.game}))
+			stars--;
+		}
 
 		// Add Cursor
 		this.game.entities.add(new Cursor({game: this.game}))
 
 		// Add Asteroids
-		let i = 20;
-		while(i){
+		let asteroids: number = 20;
+		while(asteroids){
 			this.game.entities.add(new Asteroid({game: this.game}))
-			i--;
+			asteroids--;
 		}
 
 	}

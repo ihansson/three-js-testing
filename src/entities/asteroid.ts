@@ -1,4 +1,4 @@
-import { MeshLambertMaterial, Mesh, DodecahedronGeometry } from 'three';
+import { MeshLambertMaterial, Mesh, DodecahedronGeometry, SphereGeometry, MeshBasicMaterial } from 'three';
 import { Entity } from "~/entity";
 import { rand } from "~/helpers";
 
@@ -7,6 +7,8 @@ export class Asteroid extends Entity {
 	geometry: DodecahedronGeometry;
 	material: MeshLambertMaterial;
 	mesh: Mesh;
+
+	collides: boolean = true;
 
 	constructor(options: any){
 
@@ -23,12 +25,12 @@ export class Asteroid extends Entity {
 	generate_geometry(): DodecahedronGeometry {
 
 		const detail = 0;
-		const radius = rand(25, 300) / 100;
+		const radius = rand(75, 400) / 100;
 		const geometry = new DodecahedronGeometry( radius, detail );
 
 		for(let i = 0; i < geometry.vertices.length; i++){
 			let shift_level = 500;
-			if(i === 3) shift_level = 100;
+			if(i % 2) shift_level = 250;
 			geometry.vertices[i].x += ((rand(0,100) - 50) / shift_level);
 			geometry.vertices[i].y += ((rand(0,100) - 50) / shift_level);
 			geometry.vertices[i].z += ((rand(0,100) - 50) / shift_level);
