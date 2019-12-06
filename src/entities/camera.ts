@@ -8,22 +8,22 @@ export class Camera extends Entity {
 		super(options);
 		
 		this.object = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-		this.object.position.set( 0, 0, 5 );
-		this.object.lookAt( 0, 0, 0 );
+		this.object.position.set( 0, 0, 0 );
+		this.object.lookAt( 0, 0, 5 );
 
 	}
 	update(delta: number){
 
 		const change: number = delta / 1000;
 
-		const mouse = this.game.controls;
-		const speed_x: number = this.speed * mouse.x * change;
-		const speed_y: number = this.speed * mouse.y * change;
+		const controls = this.game.controls;
+		const speed_x: number = this.speed * controls.x * change;
+		const speed_y: number = this.speed * controls.y * change;
 
-		this.object.rotation.x += speed_x;
-		this.object.rotation.z += speed_y;
+		this.object.rotateY(-1 * speed_x);
+		this.object.rotateX(speed_y);
 
-		console.log(this.object.rotation.z)
+		this.object.translateZ(this.speed * change * controls.acceleration);
 
 	}
 }

@@ -1,14 +1,14 @@
-import { CircleGeometry, LineDashedMaterial, Line } from 'three';
+import { CircleGeometry, LineDashedMaterial, Line, Object3D } from 'three';
 
 import { Entity } from "~/entity";
-
 
 export class Cursor extends Entity {
 
 	geometry: CircleGeometry;
 	material: LineDashedMaterial;
 	mesh: Line;
-	speed: number = 1;
+	speed: number = 1.2;
+	pivot: Object3D;
 
 	constructor(options: any){
 		super(options);
@@ -18,21 +18,27 @@ export class Cursor extends Entity {
 		this.material = new LineDashedMaterial( { color: 0xffff00, dashSize: 0.1, gapSize: 0.2 } );
 		this.mesh = new Line( this.geometry, this.material );
 		this.mesh.computeLineDistances();
+		this.mesh.position.set(0,0,5);
 
-		this.game.entities.scene.add( this.mesh );
+		this.pivot = new Object3D();
+		this.pivot.add( this.mesh );
 
-		console.log(this.game.entities.scene);
+		this.game.entities.scene.add( this.pivot );
+
 	}
 	update(delta: number){
 
-		const change: number = delta / 100;
+		const camera = this.game.entities.camera.object;
+		this.pivot.position.set(camera.position.x, camera.position.y, camera.position.z);
+
+		const change: number = delta / 1000;
 
 		const mouse = this.game.controls;
 		const speed_x: number = this.speed * mouse.x * change;
 		const speed_y: number = this.speed * mouse.y * change;
 
-		// this.mesh.position.x += speed_x;
-		// this.mesh.position.y += speed_y;
+		this.pivot.rotateY(-1 * speed_x);
+		this.pivot.rotateX(-1 * speed_y);
 
 	}
 }
