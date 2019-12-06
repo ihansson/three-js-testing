@@ -1,3 +1,4 @@
+import { CubeTextureLoader } from 'three';
 import { Game } from "~/game";
 import { Cursor } from "~/entities/cursor";
 import { Asteroid } from "~/entities/asteroid";
@@ -20,6 +21,16 @@ export class GameState {
 	// Space
 
 	init_space(){
+
+		// Background
+		this.game.entities.scene.background = new CubeTextureLoader().setPath( 'background/' ).load( [
+			'right.png',
+			'left.png',
+			'top.png',
+			'bot.png',
+			'front.png',
+			'back.png',
+		] );
 
 		// Add Cursor
 		this.game.entities.add(new Cursor({game: this.game}))

@@ -7,7 +7,7 @@ export class Cursor extends Entity {
 	geometry: CircleGeometry;
 	material: LineDashedMaterial;
 	mesh: Line;
-	speed: number = 1.2;
+	speed: number = 1;
 	pivot: Object3D;
 
 	constructor(options: any){
