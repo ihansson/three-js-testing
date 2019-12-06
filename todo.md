@@ -1,7 +1,8 @@
 @todo
 
-- Cursor selects item infront of it
 - Destory asteroid
+
+- Make collision use the raycaster
 - Fix stuck in collision
 
 - Put cursor on different layer

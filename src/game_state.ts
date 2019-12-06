@@ -3,6 +3,7 @@ import { Game } from "~/game";
 import { Cursor } from "~/entities/cursor";
 import { Asteroid } from "~/entities/asteroid";
 import { StarField } from "~/entities/star_field";
+import { DustField } from "~/entities/dust_field";
 
 export class GameState {
 
@@ -36,6 +37,7 @@ export class GameState {
 
 		// Background
 		this.game.entities.add(new StarField({game: this.game}));
+		this.game.entities.add(new DustField({game: this.game}));
 
 		// Add Cursor
 		this.game.entities.add(new Cursor({game: this.game}))

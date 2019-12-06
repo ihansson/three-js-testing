@@ -1,16 +1,21 @@
-import { PerspectiveCamera, PointLight } from 'three';
+import { PerspectiveCamera, PointLight, Raycaster, Vector2 } from 'three';
 import { Entity } from "~/entity";
+import { Event } from "~/event";
 
 export class Camera extends Entity {
 	object: PerspectiveCamera;
 	light: PointLight;
+	raycaster: Raycaster;
 	speed: number = 2;
+	recent_collision: boolean = false;
 	constructor(options: any){
 		super(options);
 		
 		this.object = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 		this.object.position.set( 0, 0, 0 );
 		this.object.lookAt( 0, 0, 5 );
+
+		this.raycaster = new Raycaster();
 	}
 	update(delta: number){
 
@@ -34,13 +39,24 @@ export class Camera extends Entity {
 
 		let collided = false;
 
-		this.game.entities.filter('collides', true).map(collider => {
-			if(this.object.position.distanceToSquared((<any>collider).mesh.position) < (<any>collider).geometry.parameters.radius * 1.2){
-				collided = true;
-			}
-		})
+		this.raycaster.setFromCamera( new Vector2( 0, 0 ), this.object );
+		const intersects = this.raycaster.intersectObjects( this.game.entities.filter('collides', true).map(entity => (<any>entity).mesh) );
 
-		if(collided) this.game.controls.acceleration = (this.game.controls.acceleration * -1) * 0.75;
+		let _nearest: any = false;
+		if(intersects.length > 0) _nearest = intersects[0];
+
+		if(!this.recent_collision && _nearest && _nearest.distance < 1.5){
+			// Collides
+			this.game.controls.acceleration = (this.game.controls.acceleration * -1) * 0.25;
+			this.recent_collision = true;
+			this.game.events.add(new Event({
+				'recurring': false,
+				'delay': 150,
+				'callback': () => {
+					this.recent_collision = false;
+				}
+			}))
+		}
 
 	}
 }

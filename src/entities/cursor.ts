@@ -18,10 +18,11 @@ export class Cursor extends Entity {
 
 		this.geometry = new CircleGeometry( 1, 32 );
 		this.geometry.vertices.shift();
-		this.material = new LineDashedMaterial( { color: 0xffff00, dashSize: 0.1, gapSize: 0.2 } );
+		this.material = new LineDashedMaterial( { color: 0xffff00, dashSize: 0.1, gapSize: 0.2, depthTest: false } );
 		this.mesh = new Line( this.geometry, this.material );
 		this.mesh.computeLineDistances();
 		this.mesh.position.set(0,0,5);
+		this.mesh.renderOrder = 1;
 
 		this.pivot = new Object3D();
 		this.pivot.add( this.mesh );
@@ -58,17 +59,8 @@ export class Cursor extends Entity {
 
 		let _target: any = false;
 		this.raycaster.setFromCamera( mouse, camera );
-		const intersects = this.raycaster.intersectObjects( this.game.entities.scene.children );
-		if(intersects.length > 0){
-			let distance = Infinity;
-			intersects.map((intersect) => {
-				if(intersect.distance < distance){
-					_target = intersect;
-					distance = intersect.distance;
-				}
-			})
-		}
-
+		const intersects = this.raycaster.intersectObjects( this.game.entities.filter('collides', true).map(entity => (<any>entity).mesh) );
+		if(intersects.length > 0) _target = intersects[0];
 
 		if((_target && !this.target) || (_target && _target.object.uuid !== this.target.object.uuid)){
 			// New target

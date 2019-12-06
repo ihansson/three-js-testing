@@ -17,9 +17,12 @@ export class StarField extends Entity {
 		let stars: number = 200;
 		while(stars){
 			let star = new Vector3();
-			star.x = Math.randFloatSpread( 2000 );
-			star.y = Math.randFloatSpread( 2000 );
-			star.z = Math.randFloatSpread( 2000 );
+            let theta = Math.randFloatSpread(360); 
+            let phi = Math.randFloatSpread(360); 
+			let distance = Math.randFloat(400, 800);
+            star.x = distance * window.Math.sin(theta) * window.Math.cos(phi);
+            star.y = distance * window.Math.sin(theta) * window.Math.sin(phi);
+            star.z = distance * window.Math.cos(theta);
 			this.geometry.vertices.push(star);
 			stars--;
 		}
