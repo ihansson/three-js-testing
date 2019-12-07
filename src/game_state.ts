@@ -2,6 +2,7 @@ import { CubeTextureLoader, AmbientLight, DirectionalLight, PointLight } from 't
 import { Game } from "~/game";
 import { Event } from "~/event";
 import { Cursor } from "~/entities/cursor";
+import { Shot } from "~/entities/shot";
 import { Asteroid } from "~/entities/asteroid";
 import { StarField } from "~/entities/star_field";
 import { DustField } from "~/entities/dust_field";
@@ -11,6 +12,9 @@ export class GameState {
 	game: Game;
 	type: string;
 	health: number = 100;
+	current_score: number = 0;
+	shot_delay: number = 1000;
+	last_shot: number = 0;
 
 	constructor(game: Game, type: string){
 		this.game = game;
@@ -72,6 +76,22 @@ export class GameState {
 			// lost
 		}
 		document.querySelector('#health').setAttribute('style','width:'+this.health+'%');
+	}
+
+	score(amount: number){
+		this.current_score += amount;
+		document.querySelector('#score').innerHTML = (<any>this.current_score);
+	}
+
+	shoot(){
+		const now = Date.now();
+		if(this.last_shot + this.shot_delay > now){
+			// Recently shot
+		} else {
+			// New shot
+			this.game.entities.add(new Shot({game: this.game}))
+			this.last_shot = now;
+		}
 	}
 
 	update_space(){
