@@ -1,5 +1,6 @@
 import { CubeTextureLoader, AmbientLight, DirectionalLight, PointLight } from 'three';
 import { Game } from "~/game";
+import { Event } from "~/event";
 import { Cursor } from "~/entities/cursor";
 import { Asteroid } from "~/entities/asteroid";
 import { StarField } from "~/entities/star_field";
@@ -9,6 +10,7 @@ export class GameState {
 
 	game: Game;
 	type: string;
+	health: number = 100;
 
 	constructor(game: Game, type: string){
 		this.game = game;
@@ -49,6 +51,27 @@ export class GameState {
 			asteroids--;
 		}
 
+		// UI Events
+		const time_el = document.querySelector('#time');
+		let timer = 0;
+		this.game.events.add(new Event({
+			'recurring': true,
+			'delay': 1000,
+			'callback': function(){
+				timer++;
+				time_el.innerHTML = (<any>timer);
+			}
+		}))
+
+	}
+
+	damage(amount: number){
+		this.health -= amount;
+		if(this.health < 0) this.health = 0;
+		if(this.health == 0){
+			// lost
+		}
+		document.querySelector('#health').setAttribute('style','width:'+this.health+'%');
 	}
 
 	update_space(){

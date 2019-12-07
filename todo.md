@@ -1,5 +1,9 @@
 @todo
 
+- UI for damage / score
+- Damage
+- Score
+
 - Destory asteroid
 
 - Make collision use the raycaster
@@ -12,11 +16,8 @@
 - Stars to not spawn near player
 - Clouds?
 
-- Damage
-- Score
 - Start screen
 
-- UI for damage / score
 
 - Review asteroid geometry
 

@@ -53,6 +53,7 @@ export class Camera extends Entity {
 				'recurring': false,
 				'delay': 150,
 				'callback': () => {
+					this.game.state.damage(20);
 					this.recent_collision = false;
 				}
 			}))

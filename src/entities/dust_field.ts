@@ -27,7 +27,7 @@ export class DustField extends Entity {
 			particles--;
 		}
 
-		this.material = new PointsMaterial({ color: 0xffffff, size: 0.01, depthTest: false, transparent: true, opacity: 0.5 });
+		this.material = new PointsMaterial({ color: 0xffffff, size: 0.01, depthTest: false, transparent: true, opacity: 0.8 });
 		this.mesh = new Points( this.geometry, this.material );
 		this.mesh.renderOrder = 1;
 

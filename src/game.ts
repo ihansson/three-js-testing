@@ -33,6 +33,7 @@ export class Game {
 	init_renderer(): void{
 
 		this.renderer = new WebGLRenderer({ antialias: true });
+		console.log( window.innerWidth, window.innerHeight)
 		this.renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild( this.renderer.domElement );
 
@@ -54,13 +55,6 @@ export class Game {
 	init_events(): void{
 
 		this.events = new EventSystem();
-		this.events.add(new Event({
-			'recurring': true,
-			'delay': 1000,
-			'callback': function(){
-				console.log('One Second Timer');
-			}
-		}))
 
 	}
 
