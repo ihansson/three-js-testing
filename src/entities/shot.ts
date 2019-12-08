@@ -21,8 +21,8 @@ export class Shot extends Entity {
 
 		this.geometry = new Geometry();
 		this.geometry.vertices.push(
-			camera.position,
-			new Vector3(camera.position.x, camera.position.y, camera.position.z).add(this.raycaster.ray.direction)
+			new Vector3(camera.position.x - 0.01, camera.position.y - 0.01, camera.position.z - 0.01),
+			new Vector3(camera.position.x, camera.position.y, camera.position.z)
 		);
 		this.material = new LineBasicMaterial( { color: 0xffffff } );
 		this.mesh= new Line( this.geometry, this.material );
