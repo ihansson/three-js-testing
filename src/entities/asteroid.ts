@@ -1,11 +1,11 @@
-import { MeshLambertMaterial, Mesh, DodecahedronGeometry } from 'three';
+import { MeshPhongMaterial, Mesh, DodecahedronGeometry } from 'three';
 import { Entity } from "~/entity";
 import { rand } from "~/helpers";
 
 export class Asteroid extends Entity {
 
 	geometry: DodecahedronGeometry;
-	material: MeshLambertMaterial;
+	material: MeshPhongMaterial;
 	mesh: Mesh;
 
 	collides: boolean = true;
@@ -14,7 +14,7 @@ export class Asteroid extends Entity {
 
 		super(options);
 		this.geometry = this.generate_geometry();
-		this.material = new MeshLambertMaterial( { color: 0x80d195 } );
+		this.material = new MeshPhongMaterial( { color: 0x80d195, shininess: 150 } );
 		this.mesh= new Mesh( this.geometry, this.material );
 
 		let distance = 50;
